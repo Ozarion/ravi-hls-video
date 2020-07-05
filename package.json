@@ -1,0 +1,27 @@
+{
+  "name": "ravi-hls-video",
+  "version": "1.0.0",
+  "description": "Video Upload, Render and HLS Stream Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ozarion/ravi-hls-video.git"
+  },
+  "keywords": [
+    "hls",
+    "ozarion",
+    "video",
+    "streaming",
+    "upload",
+    "cron"
+  ],
+  "author": "Ozarion",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ozarion/ravi-hls-video/issues"
+  },
+  "homepage": "https://github.com/Ozarion/ravi-hls-video#readme"
+}
