@@ -25,13 +25,13 @@
   <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
       <div class="logo">
-        <a href="https://www.ozarion.com" class="simple-text logo-mini">
+        <a href="/" class="simple-text logo-mini">
           <!-- <div class="logo-image-small">
             <img src="./assets/img/logo-small.png">
           </div> -->
           <!-- <p>CT</p> -->
         </a>
-        <a href="https://www.ozarion.com" class="simple-text logo-normal">
+        <a href="/" class="simple-text logo-normal">
           Your Logo
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
@@ -42,19 +42,19 @@
         <ul class="nav">
           <li class="active ">
             <a href="javascript:;">
-              <i class="nc-icon nc-bank"></i>
+              <i class="nc-icon nc-chart-pie-36"></i>
               <p>Dashboard</p>
             </a>
           </li>
           <li>
             <a href="javascript:;">
-              <i class="nc-icon nc-diamond"></i>
+              <i class="nc-icon nc-button-play"></i>
               <p>Uploaded Videos</p>
             </a>
           </li>
           <li>
             <a href="javascript:;">
-              <i class="nc-icon nc-pin-3"></i>
+              <i class="nc-icon nc-settings-gear-65"></i>
               <p>Settings</p>
             </a>
           </li>
@@ -113,7 +113,7 @@
       <div class="content">
         {{{body}}}
       </div>
-      <footer class="footer" style="position: absolute; bottom: 0; width: -webkit-fill-available;">
+      <footer class="footer footer-black  footer-white ">
         <div class="container-fluid">
           <div class="row">
             <nav class="footer-nav">
@@ -138,14 +138,16 @@
   <script src="/assets/js/core/popper.min.js"></script>
   <script src="/assets/js/core/bootstrap.min.js"></script>
   <script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  {{!-- <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> --}}
   <!-- Chart JS -->
   <script src="/assets/js/plugins/chartjs.min.js"></script>
   <!--  Notifications Plugin    -->
   <script src="/assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="/assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
+
+  {{{_sections.script}}}
 </body>
 
 </html>

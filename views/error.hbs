@@ -1,3 +1,9 @@
 <h1>Oops</h1>
 <h2>Seems like an error occurred!</h2>
 <pre>Our developers will surely be working on it. ;)</pre>
+
+{{#if message}}
+<div class="alert {{messageClass}}" role="alert">
+    {{message}}
+</div>
+{{/if}}

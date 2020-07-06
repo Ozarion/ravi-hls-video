@@ -17,9 +17,20 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
-app.engine('hbs', expressHbs({
-  extname:'.hbs'
-}));
+
+// setup handlebar templates
+var hbs = expressHbs.create({
+  defaultLayout: "main",
+  extname: ".hbs",
+  helpers: {
+    section: function(name, options) {
+      if (!this._sections) { this._sections = {}; }
+      this._sections[name] = options.fn(this);
+      return null;
+    }
+  }
+});
+app.engine('hbs', hbs.engine);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
