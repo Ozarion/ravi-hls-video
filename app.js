@@ -8,6 +8,7 @@ const expressHbs = require('express-handlebars');
 const indexRouter = require('./routes/index');
 const videoRouter = require('./routes/videos');
 const accountRouter = require('./routes/accounts');
+const settingRouter = require('./routes/settings');
 
 const accService = require('./services/accountService');
 
@@ -18,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
-// setup handlebar templates
+// setup handlebar template engine
 var hbs = expressHbs.create({
   defaultLayout: "main",
   extname: ".hbs",
@@ -39,7 +40,7 @@ app.set('view engine', 'hbs');
 // set static files path
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Authorization middleware
+// Rpites Authorization and mounting
 app.use((req,res, next)=> {
   // get authToken from cookies
   const authToken = req.cookies['AuthToken'];
@@ -48,11 +49,16 @@ app.use((req,res, next)=> {
   req.user = accService.authTokens[authToken];
   next();
 });
-
-// mount routes
+app.use('/accounts', accountRouter);
+app.use((req, res, next) => {
+  if (!req.user) {
+    res.redirect('/accounts/login');
+  }
+  next();
+});
 app.use('/', indexRouter);
 app.use('/videos', videoRouter);
-app.use('/accounts', accountRouter);
+app.use('/settings', settingRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
