@@ -6,7 +6,7 @@ const logger = require('morgan');
 const expressHbs = require('express-handlebars');
 
 const indexRouter = require('./routes/index');
-const uploadRouter = require('./routes/uploads');
+const videoRouter = require('./routes/videos');
 const accountRouter = require('./routes/accounts');
 
 const accService = require('./services/accountService');
@@ -51,7 +51,7 @@ app.use((req,res, next)=> {
 
 // mount routes
 app.use('/', indexRouter);
-app.use('/uploads', uploadRouter);
+app.use('/videos', videoRouter);
 app.use('/accounts', accountRouter);
 
 // catch 404 and forward to error handler
