@@ -1,6 +1,6 @@
 <div class="content">
     <div class="row">
-        <div class="col-md-4">
+        {{!-- <div class="col-md-4">
             <div class="card card-user">
                 <div class="image">
                     <img src="../assets/img/damir-bosnjak.jpg" alt="...">
@@ -104,90 +104,38 @@
                     </ul>
                 </div>
             </div>
-        </div>
-        <div class="col-md-8">
+        </div> --}}
+        <div class="col-md-12">
             <div class="card card-user">
                 <div class="card-header">
-                    <h5 class="card-title">Edit Profile</h5>
+                    <h5 class="card-title">Settings</h5>
                 </div>
                 <div class="card-body">
                     <form>
                         <div class="row">
                             <div class="col-md-5 pr-1">
-                                <div class="form-group">
-                                    <label>Company (disabled)</label>
-                                    <input type="text" class="form-control" disabled="" placeholder="Company"
-                                        value="Creative Code Inc.">
-                                </div>
-                            </div>
-                            <div class="col-md-3 px-1">
-                                <div class="form-group">
-                                    <label>Username</label>
-                                    <input type="text" class="form-control" placeholder="Username" value="michael23">
-                                </div>
-                            </div>
-                            <div class="col-md-4 pl-1">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" placeholder="Email">
-                                </div>
+                                <label>Select Intro Video: </label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 pr-1">
-                                <div class="form-group">
-                                    <label>First Name</label>
-                                    <input type="text" class="form-control" placeholder="Company" value="Chet">
+                            <div class="col-md-5 pr-1 row" style="justify-content: space-evenly;">
+                                <div>
+                                    <input type="radio" id="intro1" name="intro" value="intro1">
+                                    <label for="intro1">Intro Video 1</label><br>
                                 </div>
-                            </div>
-                            <div class="col-md-6 pl-1">
-                                <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input type="text" class="form-control" placeholder="Last Name" value="Faker">
+                                <div>
+                                    <input type="radio" id="intro2" name="intro" value="intro2">
+                                    <label for="intro2">Intro video 2</label><br>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Address</label>
-                                    <input type="text" class="form-control" placeholder="Home Address"
-                                        value="Melbourne, Australia">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 pr-1">
-                                <div class="form-group">
-                                    <label>City</label>
-                                    <input type="text" class="form-control" placeholder="City" value="Melbourne">
-                                </div>
-                            </div>
-                            <div class="col-md-4 px-1">
-                                <div class="form-group">
-                                    <label>Country</label>
-                                    <input type="text" class="form-control" placeholder="Country" value="Australia">
-                                </div>
-                            </div>
-                            <div class="col-md-4 pl-1">
-                                <div class="form-group">
-                                    <label>Postal Code</label>
-                                    <input type="number" class="form-control" placeholder="ZIP Code">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>About Me</label>
-                                    <textarea
-                                        class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
+                                <div>
+                                    <input type="radio" id="intro3" name="intro" value="intro3">
+                                    <label for="intro3">Intro video 3</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="update ml-auto mr-auto">
-                                <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
+                                <button type="submit" class="btn btn-primary btn-round">Save Settings</button>
                             </div>
                         </div>
                     </form>

@@ -1,187 +1,136 @@
 <div class="content">
     <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-5 col-md-4">
-                            <div class="icon-big text-center icon-warning">
-                                <i class="nc-icon nc-globe text-warning"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-md-8">
-                            <div class="numbers">
-                                <p class="card-category">Capacity</p>
-                                <p class="card-title">150GB
-                                <p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer ">
-                    <hr>
-                    <div class="stats">
-                        <i class="fa fa-refresh"></i>
-                        Update Now
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-5 col-md-4">
-                            <div class="icon-big text-center icon-warning">
-                                <i class="nc-icon nc-money-coins text-success"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-md-8">
-                            <div class="numbers">
-                                <p class="card-category">Revenue</p>
-                                <p class="card-title">$ 1,345
-                                <p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer ">
-                    <hr>
-                    <div class="stats">
-                        <i class="fa fa-calendar-o"></i>
-                        Last day
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-5 col-md-4">
-                            <div class="icon-big text-center icon-warning">
-                                <i class="nc-icon nc-vector text-danger"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-md-8">
-                            <div class="numbers">
-                                <p class="card-category">Errors</p>
-                                <p class="card-title">23
-                                <p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer ">
-                    <hr>
-                    <div class="stats">
-                        <i class="fa fa-clock-o"></i>
-                        In the last hour
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-5 col-md-4">
-                            <div class="icon-big text-center icon-warning">
-                                <i class="nc-icon nc-favourite-28 text-primary"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-md-8">
-                            <div class="numbers">
-                                <p class="card-category">Followers</p>
-                                <p class="card-title">+45K
-                                <p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer ">
-                    <hr>
-                    <div class="stats">
-                        <i class="fa fa-refresh"></i>
-                        Update now
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-12">
             <div class="card ">
                 <div class="card-header ">
-                    <h5 class="card-title">Users Behavior</h5>
-                    <p class="card-category">24 Hours performance</p>
+                    <h5 class="card-title">Welcome to HLS Video Stream</h5>
                 </div>
                 <div class="card-body ">
-                    <canvas id=chartHours width="400" height="100"></canvas>
-                </div>
-                <div class="card-footer ">
-                    <hr>
-                    <div class="stats">
-                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                    <div id="drop-area">
+                        <form class="my-form">
+                            <p>Upload video with the video dialog or by dragging and dropping video onto the
+                                dashed region</p>
+                            <input type="file" id="fileElem" multiple accept="image/*"
+                                onchange="handleFiles(this.files)">
+                            <label class="button" for="fileElem">Select video</label>
+
+                        </form>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card ">
-                <div class="card-header ">
-                    <h5 class="card-title">Email Statistics</h5>
-                    <p class="card-category">Last Campaign Performance</p>
-                </div>
-                <div class="card-body ">
-                    <canvas id="chartEmail"></canvas>
-                </div>
-                <div class="card-footer ">
-                    <div class="legend">
-                        <i class="fa fa-circle text-primary"></i> Opened
-                        <i class="fa fa-circle text-warning"></i> Read
-                        <i class="fa fa-circle text-danger"></i> Deleted
-                        <i class="fa fa-circle text-gray"></i> Unopened
+                    <div class="column" style="justify-content: center;">
+                        <div class="row" style="justify-content: center;">
+                            <h4> or upload video via url </h4>
+                        </div>
+                        <div class="row" style="justify-content: center;">
+                            <div class="input-group no-border col-md-8">
+                                <input type="text" id="httpUrl" value="" class="form-control"
+                                    placeholder="Enter a url...">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <i class="nc-icon nc-button-play"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <hr>
-                    <div class="stats">
-                        <i class="fa fa-calendar"></i> Number of emails sent
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="card card-chart">
-                <div class="card-header">
-                    <h5 class="card-title">NASDAQ: AAPL</h5>
-                    <p class="card-category">Line Chart with Points</p>
-                </div>
-                <div class="card-body">
-                    <canvas id="speedChart" width="400" height="100"></canvas>
-                </div>
-                <div class="card-footer">
-                    <div class="chart-legend">
-                        <i class="fa fa-circle text-info"></i> Tesla Model S
-                        <i class="fa fa-circle text-warning"></i> BMW 5 Series
-                    </div>
-                    <hr />
-                    <div class="card-stats">
-                        <i class="fa fa-check"></i> Data information certified
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-{{#section 'script'}}
-<script src="/assets/demo/demo.js"></script>
 <script>
-    $(document).ready(function () {
-        // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-        demo.initChartsPages();
-    });
+    let dropArea = document.getElementById('drop-area');
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false)
+    })
+
+    function preventDefaults(e) {
+        e.preventDefault()
+        e.stopPropagation()
+    };
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false)
+    })
+
+        ;['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false)
+        })
+
+    function highlight(e) {
+        dropArea.classList.add('highlight')
+    }
+
+    function unhighlight(e) {
+        dropArea.classList.remove('highlight')
+    }
+    dropArea.addEventListener('drop', handleDrop, false)
+
+    function handleDrop(e) {
+        let dt = e.dataTransfer
+        let files = dt.files
+
+        handleFiles(files)
+    }
+    dropArea.addEventListener('drop', handleDrop, false)
+
+    function handleDrop(e) {
+        let dt = e.dataTransfer
+        let files = dt.files
+
+        handleFiles(files)
+    }
+
 </script>
-{{/section}}
+<style>
+    #drop-area {
+        border: 2px dashed #ccc;
+        border-radius: 20px;
+        width: 480px;
+        font-family: sans-serif;
+        margin: 5px auto;
+        padding: 20px;
+    }
+
+    #drop-area.highlight {
+        border-color: purple;
+    }
+
+    p {
+        margin-top: 0;
+    }
+
+    .my-form {
+        margin-bottom: 10px;
+    }
+
+    #gallery {
+        margin-top: 10px;
+    }
+
+    #gallery img {
+        width: 150px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 10px;
+        background: #ccc;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .button:hover {
+        background: #ddd;
+    }
+
+    #fileElem {
+        display: none;
+    }
+</style>
+
+{{!-- https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/ --}}
