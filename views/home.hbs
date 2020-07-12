@@ -8,7 +8,7 @@
             {{/if}}
             <div class="card ">
                 <div class="card-header ">
-                    <h5 class="card-title">Welcome to HLS Video Stream</h5>
+                    <h5 class="card-title">Upload a Video File</h5>
                 </div>
                 <div class="card-body ">
                     <div id="drop-area">
@@ -38,10 +38,10 @@
                         </div>
                     </div>
 
-                    <form action="/videos/uploadfile" enctype="multipart/form-data" method="POST"> 
-                       <input type="text" name="video_name" required />
-                       <input type="file" name="myFile" required />
-                       <input type="submit" class="btn btn-danger" value="Upload a file"/>
+                    <form action="/videos/uploadfile" enctype="multipart/form-data" method="POST">
+                        <input type="text" name="video_name" required />
+                        <input type="file" name="myFile" required />
+                        <input type="submit" class="btn btn-danger" value="Upload a file" />
                     </form>
 
                     <!-- <form action="/videos/uptest" method="post" enctype="multipart/form-data">
