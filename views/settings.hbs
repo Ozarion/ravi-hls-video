@@ -141,8 +141,9 @@
                         </div>
                         <div style="text-align:center">
                             <br><br>
-                            <iframe width="480px" ; height="370px" id="videoDiv"
-                                src="https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4">
+                            <iframe width="480px" height="370px" id="videoDiv"
+                                src="http://localhost:3000/uploads/1594559477676-2019-08-25-18-27-46.mp4">
+
                             </iframe>
                         </div>
                         <div class="row">
@@ -150,6 +151,10 @@
                                 <button type="submit" class="btn btn-primary btn-round">Save Settings</button>
                             </div>
                         </div>
+
+                        <!-- player demo -->
+                        <!-- https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_video_js_prop -->
+
                     </form>
                 </div>
             </div>
@@ -157,19 +162,19 @@
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-        $("#intro1Btn").click(function () {
-            $("videoDiv").hide();
-        });
-        $("#intro1Btn").click(function () {
-            $("videoDiv").show();
-        });
-    });
+    // $(document).ready(function () {
+    //     $("#intro1Btn").click(function () {
+    //         $("videoDiv").hide();
+    //     });
+    //     $("#intro1Btn").click(function () {
+    //         $("videoDiv").show();
+    //     });
+    // });
 </script>
-<script src="https://cdn.bootcss.com/flv.js/1.5.0/flv.min.js"></script>
+<!-- <script src="https://cdn.bootcss.com/flv.js/1.5.0/flv.min.js"></script>
 <video id="videoElement">
     <source src="https://www.youtube.com/watch?v=j4Sqh-OXPgA" type="video/mp4">
-</video>
+</video> -->
 <script>
     if (flvjs.isSupported()) {
         var videoElement = document.getElementById('videoElement');

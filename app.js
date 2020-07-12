@@ -16,7 +16,7 @@ const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 // setup handlebar template engine
@@ -41,21 +41,21 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Rpites Authorization and mounting
-app.use((req,res, next)=> {
-  // get authToken from cookies
-  const authToken = req.cookies['AuthToken'];
+// app.use((req,res, next)=> {
+//   // get authToken from cookies
+//   const authToken = req.cookies['AuthToken'];
 
-  // Inject the user to the request
-  req.user = accService.authTokens[authToken];
-  next();
-});
-app.use('/accounts', accountRouter);
-app.use((req, res, next) => {
-  if (!req.user) {
-    res.redirect('/accounts/login');
-  }
-  next();
-});
+//   // Inject the user to the request
+//   req.user = accService.authTokens[authToken];
+//   next();
+// });
+// app.use('/accounts', accountRouter);
+// app.use((req, res, next) => {
+//   if (!req.user) {
+//     res.redirect('/accounts/login');
+//   }
+//   next();
+// });
 app.use('/', indexRouter);
 app.use('/videos', videoRouter);
 app.use('/settings', settingRouter);
@@ -66,14 +66,14 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// app.use(function(err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.render('error');
+// });
 
 module.exports = app;

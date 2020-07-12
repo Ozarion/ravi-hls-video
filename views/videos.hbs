@@ -7,24 +7,56 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" style="font-size: 12px;">
                             <thead class=" text-primary">
-                                <th>
-                                    Link
-                                </th>
-                                <th class="text-right">
-                                    Created Date
-                                </th>
+                                <tr>
+                                    <th>Video Name</th>
+                                    <th>File Name</th>
+                                    <th>Original Name</th>
+                                    <th>Size (Bytes)</th>
+                                    <th>Type</th>
+                                    <th>Encoding</th>
+                                    <th>Link</th>
+                                    <th>Created At</th>
+                                </tr>
+                                
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="#">View</a> 
-                                    </td>
-                                    <td class="text-right">
-                                        12/12/2020
-                                    </td>
-                                </tr>
+                                {{#if videos_data}}
+                                {{#each videos_data}}
+                        
+
+                                    <tr>
+                                        <td> {{this.video_name}} </td>
+                                        <td> {{this.file_name}} </td>
+                                        <td> {{this.original_name}} </td>
+                                        <td> {{this.size}} </td>
+                                        <td> {{this.mimetype}} </td>
+                                        <td> {{this.encoding}} </td>
+                                        <td>  
+                                            <a target="_blank" href="{{base_url}}/uploads/{{this.file_name}}"> <i class="fa fa-link"></i> </a> 
+                                            <a class="copy_text" data-toggle="tooltip" title="Copy Link to clipboard" href="{{base_url}}/uploads/{{this.file_name}}"> <i class="fa fa-copy"></i> </a> 
+                                        </td>
+                                        <td> <script> document.write(new Date("{{this.created_at}}").toLocaleString()) </script> </td>
+                                    </tr>
+
+                                {{/each}}
+
+                                {{else}}
+
+                                    <tr>
+                                        <td> - </td>
+                                        <td> - </td>
+                                        <td> - </td>
+                                        <td> - </td>
+                                        <td> - </td>
+                                        <td> - </td>
+                                        <td> - </td>
+                                        <td> - </td>
+                                        <td> - </td>
+                                    </tr>
+
+                                {{/if}}
                             </tbody>
                         </table>
                     </div>
@@ -33,3 +65,33 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+  
+</script>
+
+{{#section 'script'}}
+
+<script>
+    
+    $(document).ready(function(){
+
+        $('.copy_text').click(function (e) {
+           e.preventDefault();
+           var copyText = $(this).attr('href');
+
+           document.addEventListener('copy', function(e) {
+              e.clipboardData.setData('text/plain', copyText);
+              e.preventDefault();
+           }, true);
+
+           document.execCommand('copy');  
+           console.log('copied text : ', copyText);
+           alert('copied text: ' + copyText); 
+         });
+
+    })
+
+</script>
+
+{{/section}}
