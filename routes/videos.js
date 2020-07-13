@@ -1,8 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var mysql = require('mysql');
-var uniqid = require('uniqid');
-var url = require('url');
+const express = require('express');
+const router = express.Router();
+const mysql = require('mysql');
+const uniqid = require('uniqid');
+const url = require('url');
+const downloader = require('node-url-downloader');
 
 var con = mysql.createConnection({
   host: "localhost",
@@ -41,9 +42,7 @@ router.get('/', function(req, res, next) {
   });
   // console.log( result )
   // res.render('videos', {Title: 'Videos', videos_data:result});
-
 });
-
 
 
 router.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
@@ -63,44 +62,31 @@ router.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
     error.httpStatusCode = 400
     return next(error)
   }
-  // console.log(path);
-  // console.log(file.path);
-
-  // var sql = "INSERT INTO videos (original_name, file_name, slug, size, mimetype, encoding, path) VALUES ('"+video_name+"','"+original_name+"', '"+file_name+"', '"+slug+"', '"+size+"', '"+mimetype+"', '"+encoding+"', '"+path+"')";
+  
   var sql = `INSERT INTO videos (video_name, original_name, file_name, slug, size, mimetype, encoding) VALUES ('${video_name}','${original_name}', '${file_name}', '${slug}', '${size}', '${mimetype}', '${encoding}') `;
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("1 record inserted");
   });
 
-	// res.send(file.filename);
 	res.redirect('/videos');
-	// res.send(file.originalname+" -- "+file_name);
+});
+
+
+router.get('/url', function(req, res, next) {
+  const url = 'https://youtu.be/Ie3NX3kZC58';
+  const download = new downloader();
+  download.get(url);
+  download.on('done', (dst) => {
+    // download is finished
+    console.log("DOWNLOAD TEST DONE");
+
+    res.send("TEST URL");
+
+  });
   
-})
-
-// router.post('/uptest', upload.single('avatar'), function (req, res, next) {
-  
-
-// 	var storage = multer.diskStorage({
-// 	  destination: function (req, file, cb) {
-// 	    cb(null, '/tmp/my-uploads')
-// 	  },
-// 	  filename: function (req, file, cb) {
-// 	    cb(null, file.fieldname + '-' + Date.now())
-// 	  }
-// 	})
-	 
-// 	var upload = multer({ storage: storage })
-
-// })
-
-// router.post('/adada',function(req, res, next){
-
-
-
-
-// })
+  // res.send("TEST URL");
+});
 
 
 module.exports = router;
