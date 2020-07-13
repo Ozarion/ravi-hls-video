@@ -1,313 +1,131 @@
-<div class="content">
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="content">
-                <div class="row">
-                    <div class="col-md-12">
-                        {{#if message}}
-                        <div class="alert alert-{{type}}">
-                            {{message}}
-                        </div>
-                        {{/if}}
-                        <div class="card ">
-                            <div class="card-header ">
-                                <h5 class="card-title">Welcome to HLS Video Stream</h5>
-                            </div>
-                            <div class="card-body ">
-                                <div id="drop-area">
-                                    <form class="my-form">
-                                        <p>Upload video with the video dialog or by dragging and dropping video
-                                            onto the
-                                            dashed region</p>
-                                        <input type="file" id="fileElem" multiple accept="image/*"
-                                            onchange="handleFiles(this.files)">
-                                        <label class="button" for="fileElem">Select video</label>
-
-                                    </form>
-                                </div>
-                                <div class="column" style="justify-content: center;">
-                                    <div class="row" style="justify-content: center;">
-                                        <h4> or upload video via url </h4>
-                                    </div>
-                                    <div class="row" style="justify-content: center;">
-                                        <div class="input-group no-border col-md-8">
-                                            <input type="text" id="httpUrl" value="" class="form-control"
-                                                placeholder="Enter a url...">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <i class="nc-icon nc-button-play"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <form action="/videos/uploadfile" enctype="multipart/form-data" method="POST">
-                                    <input type="text" name="video_name" required />
-                                    <input type="file" name="myFile" required />
-                                    <input type="submit" class="btn btn-danger" value="Upload a file" />
-                                </form>
-
-                                <!-- <form action="/videos/uptest" method="post" enctype="multipart/form-data">
-                                              <input type="file" name="avatar" class="form-data" />
-                                              <input type="submit" name="submit" class="btn btn-success">
-                                            </form> -->
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="row card-container">
+    <div class="col-md-12" style="height:'100%'">
+        {{#if message}}
+        <div class="alert alert-{{type}}">
+            {{message}}
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12" style="height:'100%'">
-            <div class="card">
-                <div class="card-header row" style="justify-content: space-between; margin: 10px">
-                    <h4 class="card-title"> Uploaded Streams</h4>
-                    <button type="button" id="myBtn" class="btn btn-primary btn-round">Upload</button>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table" style="font-size: 12px;">
-                            <thead class=" text-primary">
-                                <tr>
-                                    <th>Video Name</th>
-                                    <th>File Name</th>
-                                    <th>Original Name</th>
-                                    <th>Size (Bytes)</th>
-                                    <th>Type</th>
-                                    <th>Encoding</th>
-                                    <th>Link</th>
-                                    <th>Created At</th>
-                                </tr>
+        {{/if}}
+        <div class="card main-card">
+            <div class="card-header row" style="justify-content: space-between; margin: 10px">
+                <h4 class="card-title"> Uploaded Streams</h4>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">
+                    Upload
+                </button>
+            </div>
 
-                            </thead>
-                            <tbody>
-                                {{#if videos_data}}
-                                {{#each videos_data}}
+            <div class="card-body">
+                <div class="table-responsive video-table">
+                    <table class="table" style="font-size: 12px;">
+                        <thead class="text-primary">
+                            <tr>
+                                <th>Video Name</th>
+                                <th>File Name</th>
+                                <th>Original Name</th>
+                                <th>Size (Bytes)</th>
+                                <th>Type</th>
+                                <th>Encoding</th>
+                                <th>Link</th>
+                                <th>Created At</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            {{#if videos_data}}
+                            {{#each videos_data}}
 
 
-                                <tr>
-                                    <td> {{this.video_name}} </td>
-                                    <td> {{this.file_name}} </td>
-                                    <td> {{this.original_name}} </td>
-                                    <td> {{this.size}} </td>
-                                    <td> {{this.mimetype}} </td>
-                                    <td> {{this.encoding}} </td>
-                                    <td>
-                                        <a target="_blank" href="{{base_url}}/uploads/{{this.file_name}}"> <i
-                                                class="fa fa-link"></i> </a>
-                                        <a class="copy_text" data-toggle="tooltip" title="Copy Link to clipboard"
-                                            href="{{base_url}}/uploads/{{this.file_name}}"> <i class="fa fa-copy"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <script> document.write(new Date("{{this.created_at}}").toLocaleString()) </script>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td> {{this.video_name}} </td>
+                                <td> {{this.file_name}} </td>
+                                <td> {{this.original_name}} </td>
+                                <td> {{this.size}} </td>
+                                <td> {{this.mimetype}} </td>
+                                <td> {{this.encoding}} </td>
+                                <td>
+                                    <a target="_blank" href="{{base_url}}/uploads/{{this.file_name}}"> <i
+                                            class="fa fa-link"></i> </a>
+                                    <a class="copy_text" data-toggle="tooltip" title="Copy Link to clipboard"
+                                        href="{{base_url}}/uploads/{{this.file_name}}"> <i class="fa fa-copy"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <script> document.write(new Date("{{this.created_at}}").toLocaleString()) </script>
+                                </td>
+                            </tr>
 
-                                {{/each}}
+                            {{/each}}
 
-                                {{else}}
+                            {{else}}
 
-                                <tr>
-                                    <td> - </td>
-                                    <td> - </td>
-                                    <td> - </td>
-                                    <td> - </td>
-                                    <td> - </td>
-                                    <td> - </td>
-                                    <td> - </td>
-                                    <td> - </td>
-                                    <td> - </td>
-                                </tr>
+                            <tr>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                                <td> - </td>
+                            </tr>
 
-                                {{/if}}
-                            </tbody>
-                        </table>
-                    </div>
+                            {{/if}}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .modal {
-        display: none;
-        position: absolute;
-        z-index: 1;
-        padding-top: 100px;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: #51cbce;
-        background-color: #98b5b6;
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-    }
-
-    .close {
-        color: #0e0d0d;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-    }
-</style>
-<style>
-    #drop-area {
-        border: 2px dashed #ccc;
-        border-radius: 20px;
-        width: 480px;
-        font-family: sans-serif;
-        margin: 5px auto;
-        padding: 20px;
-    }
-
-    #drop-area.highlight {
-        border-color: purple;
-    }
-
-    p {
-        margin-top: 0;
-    }
-
-    .my-form {
-        margin-bottom: 10px;
-    }
-
-    #gallery {
-        margin-top: 10px;
-    }
-
-    #gallery img {
-        width: 150px;
-        margin-bottom: 10px;
-        margin-right: 10px;
-        vertical-align: middle;
-    }
-
-    .button {
-        display: inline-block;
-        padding: 10px;
-        background: #ccc;
-        cursor: pointer;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
-
-    .button:hover {
-        background: #ddd;
-    }
-
-    #fileElem {
-        display: none;
-    }
-</style>
-<script type="text/javascript">
-
-</script>
-
+<!-- Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Upload Videos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/videos/uploadfile" class="dropzone" id="my-awesome-dropzone"
+                    enctype="multipart/form-data" method="POST">
+                    <div class="fallback">
+                        <input name="file" type="file" accept="video/*" />
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 {{#section 'script'}}
-
 <script>
-
-    $(document).ready(function () {
-
-        $('.copy_text').click(function (e) {
-            e.preventDefault();
-            var copyText = $(this).attr('href');
-
-            document.addEventListener('copy', function (e) {
-                e.clipboardData.setData('text/plain', copyText);
-                e.preventDefault();
-            }, true);
-
-            document.execCommand('copy');
-            console.log('copied text : ', copyText);
-            alert('copied text: ' + copyText);
-        });
-
-    })
-
-</script>
-<script>
-    var modal = document.getElementById("myModal");
-    var btn = document.getElementById("myBtn");
-    var span = document.getElementsByClassName("close")[0];
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-</script>
-<script>
-    let dropArea = document.getElementById('drop-area');
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        dropArea.addEventListener(eventName, preventDefaults, false)
-    })
-
-    function preventDefaults(e) {
-        e.preventDefault()
-        e.stopPropagation()
+    // Configure Dropzone. Add Chunk Upload Option, remove multifile upload and limit acceptedFiles
+    Dropzone.options.myAwesomeDropzone = {
+        paramName: "file",
+        accept: function (file, done) {
+            if (file.name == "justinbieber.jpg") {
+                done("Naha, you don't.");
+            }
+            else { done(); }
+        },
+        parallelUploads: 1,
+        uploadMultiple: false,
+        chunking: true,
+        chunkSize: 20000000,
+        acceptedFiles: "video/*",
+        chunksUploaded: runOnUploaded
     };
-    ['dragenter', 'dragover'].forEach(eventName => {
-        dropArea.addEventListener(eventName, highlight, false)
-    })
 
-        ;['dragleave', 'drop'].forEach(eventName => {
-            dropArea.addEventListener(eventName, unhighlight, false)
-        })
+    function runOnUploaded(file) {
+        debugger
 
-    function highlight(e) {
-        dropArea.classList.add('highlight')
     }
-
-    function unhighlight(e) {
-        dropArea.classList.remove('highlight')
-    }
-    dropArea.addEventListener('drop', handleDrop, false)
-
-    function handleDrop(e) {
-        let dt = e.dataTransfer
-        let files = dt.files
-
-        handleFiles(files)
-    }
-    dropArea.addEventListener('drop', handleDrop, false)
-
-    function handleDrop(e) {
-        let dt = e.dataTransfer
-        let files = dt.files
-
-        handleFiles(files)
-    }
-
 </script>
 
 

@@ -3,7 +3,7 @@ const router = express.Router();
 const mysql = require('mysql');
 const uniqid = require('uniqid');
 const url = require('url');
-const downloader = require('node-url-downloader');
+const Downloader = require('node-url-downloader');
 
 var con = mysql.createConnection({
   host: "localhost",
@@ -34,28 +34,24 @@ var upload = multer({ storage: storage })
 
 /* GET videos listing. */
 router.get('/', function(req, res, next) {
-	console.log(url);
   con.query("SELECT * FROM videos ORDER BY id DESC", function (err, result, fields) {
     if (err) throw err;
     console.log(result);
     res.render('videos', {Title: 'Videos', videos_data:result,base_url:url.host});
   });
-  // console.log( result )
-  // res.render('videos', {Title: 'Videos', videos_data:result});
 });
 
 
-router.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
+router.post('/uploadfile', upload.single('file'), (req, res, next) => {
+  
   const file = req.file;
   let file_name = file.filename;
-  let video_name = req.body.video_name;
+  let video_name = file_name;
   let size = file.size;
   let original_name = file.originalname;
   let slug = uniqid();
   let mimetype = file.mimetype;
   let encoding = file.encoding;
-  // let path = file.path.replace("\\g", "\\\\\\\\");
-
 
   if (!file) {
     const error = new Error('Please upload a file')
@@ -75,7 +71,7 @@ router.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
 
 router.get('/url', function(req, res, next) {
   const url = 'https://youtu.be/Ie3NX3kZC58';
-  const download = new downloader();
+  const download = new Downloader();
   download.get(url);
   download.on('done', (dst) => {
     // download is finished

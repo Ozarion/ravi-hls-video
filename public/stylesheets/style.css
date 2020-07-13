@@ -1,8 +1,17 @@
-/* body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.content {
+    min-height: 83%;
 }
 
-a {
-  color: #00B7FF;
-} */
+#sideMenu {
+    
+}
+
+.main-card {
+
+}
+
+@media screen and (min-height: 800px) {
+    .main-card {
+        min-height: 720px;
+    }
+}
