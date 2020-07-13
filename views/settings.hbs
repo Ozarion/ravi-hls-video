@@ -1,3 +1,10 @@
+<style>
+    .video-model-content {
+        width: 674px;
+    }
+    
+</style>
+
 <div class="row card-container">
     <div class="col-md-12">
         <div class="card card-user main-card">
@@ -17,27 +24,20 @@
                                 <input type="radio" id="intro1" name="intro" value="intro1" onselect="videoElement">
                                 <label for="intro1">Intro Video 1</label>
                                 <br>
-                                <button width="10" class="btn btn-primary btn-round" id="intro1Btn">Preview</button>
+                                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#preview1Modal">Preview</button>
                                 <br>
                             </div>
                             <div>
                                 <input type="radio" id="intro2" name="intro" value="intro2">
                                 <label for="intro2">Intro video 2</label><br>
-                                <button width="10" class="btn btn-primary btn-round" id="intro2Btn">Preview</button><br>
+                                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#preview2Modal">Preview</button>
                             </div>
                             <div>
                                 <input type="radio" id="intro3" name="intro" value="intro3">
                                 <label for="intro3">Intro video 3</label><br>
-                                <button width="10" class="btn btn-primary btn-round" id="intro3Btn">Preview</button>
+                                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#preview3Modal">Preview</button>
                             </div>
                         </div>
-                    </div>
-                    <div style="text-align:center">
-                        <br><br>
-                        <iframe width="480px" height="370px" id="videoDiv"
-                            src="http://localhost:3000/uploads/1594559477676-2019-08-25-18-27-46.mp4">
-
-                        </iframe>
                     </div>
                     <div class="row">
                         <div class="update ml-auto mr-auto">
@@ -49,17 +49,77 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="preview1Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content video-model-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                   <video width="640" height="480" controls>
+                    <source src="/preview-videos/preview1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="preview2Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content video-model-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                   <video width="640" height="480" controls>
+                    <source src="/preview-videos/preview2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="preview3Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content video-model-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <video width="640" height="480" controls>
+                    <source src="/preview-videos/preview3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#section 'script'}}
 <script>
+
 </script>
-<script>
-    if (flvjs.isSupported()) {
-        var videoElement = document.getElementById('videoElement');
-        var flvPlayer = flvjs.createPlayer({
-            type: 'flv',
-            url: 'https://www.youtube.com/watch?v=j4Sqh-OXPgA'
-        });
-        flvPlayer.attachMediaElement(videoElement);
-        flvPlayer.load();
-        flvPlayer.play();
-    }
-</script>
+{{/section}}
