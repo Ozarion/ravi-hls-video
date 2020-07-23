@@ -16,7 +16,7 @@ const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // setup handlebar template engine
@@ -24,7 +24,7 @@ var hbs = expressHbs.create({
   defaultLayout: "main",
   extname: ".hbs",
   helpers: {
-    section: function(name, options) {
+    section: function (name, options) {
       if (!this._sections) { this._sections = {}; }
       this._sections[name] = options.fn(this);
       return null;
@@ -61,7 +61,7 @@ app.use('/videos', videoRouter);
 app.use('/settings', settingRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
