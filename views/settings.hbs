@@ -2,49 +2,416 @@
     .video-model-content {
         width: 674px;
     }
-    
 </style>
 
 <div class="row card-container">
     <div class="col-md-12">
         <div class="card card-user main-card">
             <div class="card-header">
-                <h5 class="card-title">Settings</h5>
+                <h2 class="card-title">Settings</h2>
             </div>
             <div class="card-body">
                 <form>
                     <div class="row">
                         <div class="col-md-5 pr-1">
-                            <label>Select Intro Video: </label>
+                            <label>Selected Intro Video: </label>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-3">
+                            <div>
+                                <input type="radio" id="previewNone" name="intro" value="previewNone" checked>
+                                <label for="previewNone">None</label><br>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <input type="radio" id="preview1" name="intro" value="preview1">
+                                <label for="preview1">Intro Video 1</label>
+                                <br>
+                                <button type="button" class="btn btn-primary btn-round" data-toggle="modal"
+                                    data-target="#preview1Modal">Preview</button>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <input type="radio" id="preview2" name="intro" value="preview2">
+                                <label for="preview2">Intro video 2</label>
+                                <br>
+                                <button type="button" class="btn btn-primary btn-round" data-toggle="modal"
+                                    data-target="#preview2Modal">Preview</button>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <input type="radio" id="preview3" name="intro" value="preview3">
+                                <label for="preview3">Intro video 3</label>
+                                <br>
+                                <button type="button" class="btn btn-primary btn-round" data-toggle="modal"
+                                    data-target="#preview3Modal">Preview</button>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-5 pr-1 row" style="justify-content: space-evenly;">
-                            <div>
-                                <input type="radio" id="intro1" name="intro" value="intro1" onselect="videoElement">
-                                <label for="intro1">Intro Video 1</label>
-                                <br>
-                                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#preview1Modal">Preview</button>
-                                <br>
+                        <div class="col-md-5 pr-1">
+                            <h5>Video Process Settings:</h5>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-12 pb-1">
+                            <label>Watermark:</label>
+                            <div class="row">
+                                <div class="col-md-6 pb-5">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="WatermarkSwitch">
+                                        <label class="custom-control-label" for="WatermarkSwitch">Use Watermark:</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="showOnlyIfOnWatermark" style="display: none;">
+                                        <button type="button" class="btn btn-primary float-right" data-toggle="modal"
+                                            data-target="#WatermarkModal">
+                                            Open To Set/Edit
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <input type="radio" id="intro2" name="intro" value="intro2">
-                                <label for="intro2">Intro video 2</label><br>
-                                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#preview2Modal">Preview</button>
+                        </div>
+                        <div class="col-md-6 pb-1">
+                            <label>Selected Video Bitrate (Kbps): </label>
+                            <select class="custom-select mr-sm-2" id="BitrateSelect">
+                                <option selected>Default</option>
+                                <option value="bitrate1">400kbps (Low)</option>
+                                <option value="bitrate2">800 - 1200kbps (Medium)</option>
+                                <option value="bitrate3">1200 - 1500kbps (High)</option>
+                                <option value="bitrate3">1500 - 4000kbps (Hd)</option>
+                                <option value="bitrate3">8000- 14000kbps (4K)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 pb-1">
+                            <label>Selected Audio Bitrate/Quality (Kbps): </label>
+                            <select class="custom-select mr-sm-2" id="AudioBitrateSelect">
+                                <option selected>Default</option>
+                                <option value="Audiobitrate1">96 kbps (Low)</option>
+                                <option value="Audiobitrate2">192 kbps (Medium)</option>
+                                <option value="Audiobitrate3">320 kbps (High)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 pb-1">
+                            <label>Selected Video Resolution: </label>
+                            <select class="custom-select mr-sm-2" id="ResolutionSelect">
+                                <option selected>Default</option>
+                                <option value="resolution2">240p (426x240) LOW</option>
+                                <option value="resolution3">360p (640x360) Medium</option>
+                                <option value="resolution4">480p (854x480) High</option>
+                                <option value="resolution5">720p (1280x720) HD</option>
+                                <option value="resolution6">2160p (3840x2160) 4k</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 pr-1">
+                            <h5>User Settings:</h5>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="CurrentPassword">Current Password</label>
+                                <input type="password" class="form-control" id="CurrentPassword">
                             </div>
-                            <div>
-                                <input type="radio" id="intro3" name="intro" value="intro3">
-                                <label for="intro3">Intro video 3</label><br>
-                                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#preview3Modal">Preview</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="NewPassword">New Password</label>
+                                <input type="password" class="form-control" id="NewPassword">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ConFirmPassword">Confirm Password</label>
+                                <input type="password" class="form-control" id="ConfirmPassword">
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-5 pr-1">
+                            <h5>Remote Settings:</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 pb-5">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="RemoteStorageSwitch">
+                                <label class="custom-control-label" for="RemoteStorageSwitch">Use Remote
+                                    Storage:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="showOnlyIfOnRemoteStorage" style="display: none;">
+                                <button class="btn btn-primary float-right" type="button" data-toggle="collapse"
+                                    data-target="#RemoteStorageSettings" aria-expanded="false"
+                                    aria-controls="RemoteStorageSettings">
+                                    Settings
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="collapse" id="RemoteStorageSettings">
+                                <div class="btn-group mb-5" role="group" aria-label="ActionButtons">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#AddNewRemoteStorageModal">Add New</button>
+                                    <button type="button" class="btn btn-danger">Remove All</button>
+                                </div>
+                                <div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Storage Type</th>
+                                                <th scope="col">Server Name</th>
+                                                <th scope="col" class="float-right">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>FTP</td>
+                                                <td>Admin</td>
+                                                <td class="float-right">
+                                                    <button type="button" class="btn btn-Secondary"
+                                                        id="ViewRemoteSetting" data-toggle="modal"
+                                                        data-target="#ViewRemoteStorageModal">View</button>
+                                                    <button type="button" class="btn btn-warning" id="EditRemoteSetting"
+                                                        data-toggle="modal"
+                                                        data-target="#EditRemoteStorageModal">Edit</button>
+                                                    <button type="button" class="btn btn-danger"
+                                                        id="DeleteRemoteSetting">Delete</button>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="update ml-auto mr-auto">
                             <button type="submit" class="btn btn-primary btn-round">Save Settings</button>
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Remote Storage Modals -->
+<div class="modal fade " id="AddNewRemoteStorageModal" tabindex="-1" role="dialog"
+    aria-labelledby="AddNewRemoteStorageLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AddNewRemoteStorageLabel">Add New</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-xl">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="StorageType">Storage Type</label>
+                            <select class="form-control" id="StorageTypeOptions" disabled>
+                                <option selected>FTP</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="ServerName">Server Name</label>
+                            <input class="form-control" type="text" placeholder="Type Server Name" id="ServerName">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="UserName">User Name</label>
+                            <input class="form-control" type="text" placeholder="Type User Name" id="UserName">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Password">Password</label>
+                            <input class="form-control" type="password" placeholder="Type Password" id="Password">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="StoragePassword">Port</label>
+                            <input class="form-control" type="number" placeholder="Type Port" id="StoragePort">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="AddRemoteStorage">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ViewRemoteStorageModal" tabindex="-1" role="dialog" aria-labelledby="ViewRemoteStorageLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ViewStorageLabel">View Remote Storage</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-xl">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="StorageType">Storage Type</label>
+                            <select class="form-control" id="StorageTypeOptions" disabled>
+                                <option selected>FTP</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="ServerName">Server Name</label>
+                            <input class="form-control" value="Admin" type="text" placeholder="Type Server Name"
+                                disabled id="ServerName">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="UserName">User Name</label>
+                            <input class="form-control" value="Developer" type="text" placeholder="Type User Name"
+                                disabled id="UserName">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Password">Password</label>
+                            <input class="form-control" value="3328984398" type="password" placeholder="Type Password"
+                                disabled id="Password">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="StoragePassword">Port</label>
+                            <input class="form-control" value="3400" type="number" placeholder="Type Port" disabled
+                                id="StoragePort">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditRemoteStorageModal" tabindex="-1" role="dialog" aria-labelledby="EditRemoteStorageLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditStorageLabel">Edit Remote Storage</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-xl">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="StorageType">Storage Type</label>
+                            <select class="form-control" id="StorageTypeOptions" disabled>
+                                <option selected>FTP</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="ServerName">Server Name</label>
+                            <input class="form-control" value="Admin" type="text" placeholder="Type Server Name"
+                                id="ServerName">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="UserName">User Name</label>
+                            <input class="form-control" value="Developer" type="text" placeholder="Type User Name"
+                                id="UserName">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Password">Password</label>
+                            <input class="form-control" value="3328984398" type="password" placeholder="Type Password"
+                                id="Password">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="StoragePassword">Port</label>
+                            <input class="form-control" value="3400" type="number" placeholder="Type Port"
+                                id="StoragePort">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="SaveEditRemoteStorage">Save Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- End Remote Storage Modals -->
+<div class="modal fade" id="WatermarkModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+    aria-labelledby="WatermarkModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="WatermarkModalLabel">Set or Edit Watermark</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label class="mt-4 ">Add/Change Watermark Image:</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="ChooseWatermark">
+                    <label class="custom-file-label" for="ChooseWatermark">Choose File</label>
+                </div>
+                <label class="mt-4 ">Selected Watermark Position:</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="radio" name="SelectableWatermarkPosition" value="Default"
+                            id="SelectableWatermarkPosition" checked>
+                        <label>Default - Bottom Left</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" name="SelectableWatermarkPosition" value="BottomRight"
+                            id="SelectableWatermarkPosition">
+                        <label>Bottom Right</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" name="SelectableWatermarkPosition" value="Center"
+                            id="SelectableWatermarkPosition">
+                        <label>Center</label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -61,7 +428,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                   <video width="640" height="480" controls>
+                <video width="640" height="480" controls>
                     <source src="/preview-videos/preview1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -83,7 +450,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                   <video width="640" height="480" controls>
+                <video width="640" height="480" controls>
                     <source src="/preview-videos/preview2.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -120,6 +487,23 @@
 
 {{#section 'script'}}
 <script>
-
+    $("#WatermarkSwitch").change(function () {
+        if ($(this).prop("checked") == true) {
+            console.log("Watermark Toggle is now set to On");
+            $("#showOnlyIfOnWatermark").fadeIn("slow");
+        } else {
+            console.log("Watermark Toggle is currently set to Off");
+            $("#showOnlyIfOnWatermark").fadeOut("slow");
+        }
+    });
+    $("#RemoteStorageSwitch").change(function () {
+        if ($(this).prop("checked") == true) {
+            console.log("Remote Storage Toggle is now set to On");
+            $("#showOnlyIfOnRemoteStorage").fadeIn("slow");
+        } else {
+            console.log("Remote Storage Toggle is currently set to Off");
+            $("#showOnlyIfOnRemoteStorage").fadeOut("slow");
+        }
+    });
 </script>
 {{/section}}

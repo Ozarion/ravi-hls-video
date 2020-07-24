@@ -8,7 +8,7 @@
         <div class="card main-card">
             <div class="card-header row" style="justify-content: space-between; margin: 10px">
                 <h4 class="card-title"> Uploaded Streams</h4>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">
+                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#uploadModal">
                     Upload
                 </button>
             </div>
@@ -89,12 +89,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/videos/uploadfile" class="dropzone" id="my-awesome-dropzone"
-                    enctype="multipart/form-data" method="POST">
-                    <div class="fallback">
-                        <input name="file" type="file" accept="video/*" />
-                    </div>
-                    
+
+                <form action="/videos/uploadfile" enctype="multipart/form-data" method="POST">
+                    <div class="dropzone" id="myDropzone"></div>
+                    <button type="submit" class="btn btn-primary w-100" id="submit-all"> upload </button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -106,25 +104,30 @@
 {{#section 'script'}}
 <script>
     // Configure Dropzone. Add Chunk Upload Option, remove multifile upload and limit acceptedFiles
-    Dropzone.options.myAwesomeDropzone = {
-        paramName: "file",
-        accept: function (file, done) {
-            if (file.name == "justinbieber.jpg") {
-                done("Naha, you don't.");
-            }
-            else { done(); }
-        },
-        parallelUploads: 1,
+    Dropzone.options.myDropzone = {
+        url: '/videos/uploadFiles',
+        autoProcessQueue: false,
         uploadMultiple: false,
+        parallelUploads: 1,
+        maxFiles: 1,
         chunking: true,
-        chunkSize: 20000000,
-        acceptedFiles: "video/*",
-        chunksUploaded: runOnUploaded
-    };
+        maxFilesize: 10000,
+        acceptedFiles: 'video/*',
+        addRemoveLinks: true,
+        chunksUploaded: runOnUploaded(),
+        init: function () {
+            dzClosure = this;
+            document.getElementById("submit-all").addEventListener("click", function (e) {
+                // Make sure that the form isn't actually being sent.
+                e.preventDefault();
+                e.stopPropagation();
+                dzClosure.processQueue();
+            });
+        }
+    }
 
     function runOnUploaded(file) {
         debugger
-
     }
 </script>
 
