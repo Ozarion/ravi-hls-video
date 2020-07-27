@@ -4,20 +4,9 @@ const mysql = require('mysql');
 const uniqid = require('uniqid');
 const url = require('url');
 const Downloader = require('node-url-downloader');
+const dbConnection = require("../repositories/db");
 
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "db_videos"
-});
-
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
-
-var multer  = require('multer')
+var multer = require('multer')
 // var upload = multer({ dest: 'uploads/' })
 
 // SET STORAGE
@@ -29,47 +18,51 @@ var storage = multer.diskStorage({
     cb(null, Date.now() + '-' + file.originalname)
   }
 })
- 
+
 var upload = multer({ storage: storage })
 
 /* GET videos listing. */
-router.get('/', function(req, res, next) {
-  con.query("SELECT * FROM videos ORDER BY id DESC", function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-    res.render('videos', {Title: 'Videos', videos_data:result,base_url:url.host});
+router.get('/', function (req, res, next) {
+  dbConnection.Get().then(con => {
+    con.query("SELECT * FROM videos ORDER BY id DESC", function (err, result, fields) {
+      if (err) throw err;
+      console.log(result);
+      res.render('videos', { Title: 'Videos', videos_data: result, base_url: url.host });
+    });
   });
 });
 
 
 router.post('/uploadfile', upload.single('file'), (req, res, next) => {
-  
-  const file = req.file;
-  let file_name = file.filename;
-  let video_name = file_name;
-  let size = file.size;
-  let original_name = file.originalname;
-  let slug = uniqid();
-  let mimetype = file.mimetype;
-  let encoding = file.encoding;
+  dbConnection.Get(con => {
 
-  if (!file) {
-    const error = new Error('Please upload a file')
-    error.httpStatusCode = 400
-    return next(error)
-  }
-  
-  var sql = `INSERT INTO videos (video_name, original_name, file_name, slug, size, mimetype, encoding) VALUES ('${video_name}','${original_name}', '${file_name}', '${slug}', '${size}', '${mimetype}', '${encoding}') `;
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("1 record inserted");
+    const file = req.file;
+    let file_name = file.filename;
+    let video_name = file_name;
+    let size = file.size;
+    let original_name = file.originalname;
+    let slug = uniqid();
+    let mimetype = file.mimetype;
+    let encoding = file.encoding;
+
+    if (!file) {
+      const error = new Error('Please upload a file')
+      error.httpStatusCode = 400
+      return next(error)
+    }
+
+    var sql = `INSERT INTO videos (video_name, original_name, file_name, slug, size, mimetype, encoding) VALUES ('${video_name}','${original_name}', '${file_name}', '${slug}', '${size}', '${mimetype}', '${encoding}') `;
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log("1 record inserted");
+    });
+
+    res.redirect('/videos');
   });
-
-	res.redirect('/videos');
 });
 
 
-router.get('/url', function(req, res, next) {
+router.get('/url', function (req, res, next) {
   const url = 'https://youtu.be/Ie3NX3kZC58';
   const download = new Downloader();
   download.get(url);
@@ -80,7 +73,7 @@ router.get('/url', function(req, res, next) {
     res.send("TEST URL");
 
   });
-  
+
   // res.send("TEST URL");
 });
 
